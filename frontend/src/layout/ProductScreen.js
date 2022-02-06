@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
+import MassageBox from '../components/MassageBox';
 import Rating from '../components/Rating';
 import { data } from '../data';
 
@@ -9,7 +10,7 @@ function ProductScreen(props) {
     const product = data.products.find((x)=>(x._id === params.productId));
     // console.log(product);
     if(!product){
-        return (<div>Not Found</div>);
+        return (<div><MassageBox variant='danger'>Product Not Foud!!!</MassageBox></div>);
     }
     return (
         <div>
@@ -44,7 +45,7 @@ function ProductScreen(props) {
                             <li>
                                 <div className='cus-row'>
                                     <div>Status</div>
-                                    <div>{product.countInStock > 0?<span className='success'>In Stock</span>:<span className='error'>Unavailable</span>}</div>
+                                    <div>{product.countInStock > 0?<span className='success'>In Stock</span>:<span className='danger'>Unavailable</span>}</div>
                                 </div>
                             </li>
                             <li>
