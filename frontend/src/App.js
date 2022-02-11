@@ -1,7 +1,7 @@
 import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import HomeScreen from "./layout/HomeScreen";
 import ProductScreen from "./layout/ProductScreen";
-import {Link, Route, Routes} from "react-router-dom";
 
 
 function App() {
@@ -19,9 +19,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomeScreen/>} />
-            <Route path="product" >
-              <Route path=":productId" element={<ProductScreen />} />
-            </Route>
+            <Route path="products/:productId" element={<ProductScreen  />} />
           </Routes>
         </main>
         <footer className="cus-row center">

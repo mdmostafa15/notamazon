@@ -1,24 +1,24 @@
-import { PRODUCT_LIST_FAIL, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS } from "../constants";
+import { PRODUCT_DETAILS_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS } from "../constants";
 
 const initState = {
     loading: false,
-    products:[],
+    product:[],
     error: ''
 }
-const proListReducer =(state=initState, action)=>{
+const proDetailsReducer =(state=initState, action)=>{
     switch (action.type) {
-        case PRODUCT_LIST_REQUEST:
+        case PRODUCT_DETAILS_REQUEST:
             return {
                 ...state,
                 loading:true
             };
-        case PRODUCT_LIST_SUCCESS: 
+        case PRODUCT_DETAILS_SUCCESS: 
         return {
             ...state,
-            products: action.payload,
+            product: action.payload,
             loading: false
         }
-        case PRODUCT_LIST_FAIL:
+        case PRODUCT_DETAILS_FAIL:
             return {
                 ...state,
                 error: action.payload,
@@ -30,4 +30,4 @@ const proListReducer =(state=initState, action)=>{
     }
 }
 
-export default proListReducer;
+export default proDetailsReducer;

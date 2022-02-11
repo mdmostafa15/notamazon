@@ -1,4 +1,11 @@
-// import { data } from '../data';
+/**
+ * displaying products to screen calling <Product> component
+ * @using Components on ...
+ * <LoadingBox> // loading page
+ * <MessageBox> // provide error message
+ */
+
+// import dependencies...
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoadingBox from '../components/LoadingBox';
@@ -7,19 +14,19 @@ import Product from '../components/Product';
 import { productListAct } from '../util/productActions';
 
 function HomeScreen(props) {
+// read data from store usindg react-redux hooks
   const dispatch = useDispatch();
-  
   const productList = useSelector((state)=>{
     console.log("home :",state.productList);
     return state.productList;
   });
+  const {loading, products, error} = productList;
 
+  // load date to redux store calling action of product List
   useEffect(()=>{
     dispatch(productListAct())
   },[dispatch]);
   
-  const {loading, products, error} = productList;
-
   return (
     <div>
       {

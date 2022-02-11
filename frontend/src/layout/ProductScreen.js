@@ -1,19 +1,44 @@
-import React from 'react';
+/**
+ * @using Components ...
+ * <MassageBox> // product not found
+ * <Rating> // reviews 
+ * displaying single product details ...
+ */
+// 
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import LoadingBox from '../components/LoadingBox';
 import MassageBox from '../components/MassageBox';
 import Rating from '../components/Rating';
-import { data } from '../data';
+import { productDetailsAct } from '../util/productActions';
 
 function ProductScreen(props) {
+    // extracting param from url
     let params = useParams();
+    const productId = params.productId;
     // console.log(params.productId);
-    const product = data.products.find((x)=>(x._id === params.productId));
-    // console.log(product);
-    if(!product){
-        return (<div><MassageBox variant='danger'>Product Not Foud!!!</MassageBox></div>);
-    }
+
+    // read data from store usindg react-redux hooks
+  const dispatch = useDispatch();
+  const productDetails = useSelector((state)=>{
+    console.log("home :",state.productDetails);
+    return state.productDetails;
+  });
+  const {loading, product, error} = productDetails;
+    // load date to redux store calling action of product List
+    useEffect(()=>{
+        dispatch(productDetailsAct(productId))
+      },[dispatch, productId]);
+
+      
+
     return (
-        <div>
+            loading?<LoadingBox />
+            :error?
+            <MassageBox variant='danger'>{error}</MassageBox>
+            :
+          <div>
             <Link to='/'>back to home</Link>
             <div className='cus-row top'>
                 <div className='col-2'>
